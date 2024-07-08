@@ -1,13 +1,14 @@
-const format = require("pg-format");
+const mysql = require("mysql2");
 const db = require("../connection");
 
 const seed = ({
-  fixturesData,
-  responsesData,
-  rolesData,
-  teamsData,
   usersData,
-  venuesData,
+  quizData,
+  rolesData,
+  attemptsData,
+  anoptionData,
+  aoranData,
+  apostrophesData,
 }) => {
   return db
     .query(`DROP TABLE IF EXISTS responses;`)

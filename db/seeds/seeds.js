@@ -68,6 +68,7 @@ const seed = ({
           user_id INT AUTO_INCREMENT PRIMARY KEY,
           user_role INT NOT NULL,
           FOREIGN KEY (user_role) REFERENCES roles(role_id),
+          user_username VARCHAR(255) NOT NULL,
           user_name VARCHAR(255) NOT NULL,
           user_password VARCHAR(255)
         )
@@ -136,14 +137,17 @@ const seed = ({
     })
     .then(() => {
       const insertUsersQueryStr = mysql.format(
-        `INSERT INTO users (user_id, user_name, user_password, user_role) VALUES ?`,
+        `INSERT INTO users (user_id, user_username, user_name, user_password, user_role) VALUES ?`,
         [
-          usersData.map(({ user_id, user_name, user_password, user_role }) => [
-            user_id,
-            user_name,
-            user_password,
-            user_role,
-          ]),
+          usersData.map(
+            ({
+              user_id,
+              user_username,
+              user_name,
+              user_password,
+              user_role,
+            }) => [user_id, user_username, user_name, user_password, user_role]
+          ),
         ]
       );
       return db.query(insertUsersQueryStr);

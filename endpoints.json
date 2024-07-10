@@ -1,118 +1,303 @@
 {
-    "GET /api": {
-      "description": "serves up a json representation of all the available endpoints of the api"
-    },
-    "GET /api/topics": {
-      "description": "serves an array of all topics",
-      "queries": [],
-      "exampleResponse": {
-        "topics": [{ "slug": "football", "description": "Footie!" }]
-      }
-    },
-    "GET /api/articles": {
-      "description": "serves an array of all articles",
-      "queries": ["author", "topic", "sort_by", "order"],
-      "exampleResponse": {
-        "articles": [
-          {
-            "title": "Seafood substitutions are increasing",
-            "topic": "cooking",
-            "author": "weegembump",
-            "body": "Text from the article..",
-            "created_at": "2018-05-30T15:59:13.341Z",
-            "votes": 0,
-            "comment_count": 6
-          }
-        ]
-      }
-    },
-    "GET /api/articles/:article_id": {
-      "description": "serves a json representation of the requested article",
-      "queries": ["author", "topic", "sort_by", "order"],
-      "exampleResponse": {
-        "articles": [
-          {
-            "article_id": 4,
-            "title": "Student SUES Mitch!",
-            "topic": "mitch",
-            "author": "rogersop",
-            "body": "We all love Mitch and his wonderful, unique typing style. However, the volume of his typing has ALLEGEDLY burst another students eardrums, and they are now suing for damages",
-            "created_at": "2020-05-06T01:14:00.000Z",
-            "votes": 0,
-            "article_img_url": "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700"
-          }
-        ]
-      }
-    },
-    "GET /api/articles/:article_id/comments": {
-      "description": "serves an array of comments linked to the requested article",
-      "queries": ["comment_id", "votes", "author", "sort_by", "order"],
-      "exampleResponse": {
-        "comments": [
-          {
-            "comment_id": 10,
-            "body": "git push origin master",
-            "article_id": 3,
-            "author": "icellusedkars",
-            "votes": 0,
-            "created_at": "2020-06-20T07:24:00.000Z"
-          }
-        ]
-      }
-    },
-    "POST /api/articles/:article_id/comments": {
-      "description": "posts a new comment to the requested article and serves the comment in response",
-      "queries": [],
-      "exampleResponse": {
-        "comments": [
-          {
-            "comment_id": 10,
-            "body": "git push origin master",
-            "article_id": 3,
-            "author": "icellusedkars",
-            "votes": 0,
-            "created_at": "2020-06-20T07:24:00.000Z"
-          }
-        ]
-      }
-    },
-    "PATCH /api/articles/:article_id": {
-      "description": "posts a new comment to the requested article and serves the comment in response",
-      "queries": [],
-      "exampleResponse": {
-        "comments": [
-          {
-            "comment_id": 10,
-            "body": "git push origin master",
-            "article_id": 3,
-            "author": "icellusedkars",
-            "votes": 0,
-            "created_at": "2020-06-20T07:24:00.000Z"
-          }
-        ]
-      }
-    },
-    "DELETE /api/comments/:comment_id": {
-      "description": "deletes the comment specified in comment_id, provides only 204 status in",
-      "queries": [],
-      "exampleResponse": {
-       
-      }
-    },
-  
-    "GET /api/users": {
-     "description": "serves an array of all Users",
-     "queries": ["username", "name", "sort_by", "order"],
-     "exampleResponse": {
-       "users": [
+  "GET /api": {
+    "description": "serves up a json representation of all the available endpoints of the api"
+  },
+  "GET /api/users": {
+    "description": "serves an array of all users",
+    "queries": [],
+    "exampleResponse": {
+      "users": [
         {
-          "username": "tickle122",
-          "name": "Tom Tickle",
-          "avatar_url": "https://vignette.wikia.nocookie.net/mrmen/images/d/d6/Mr-Tickle-9a.png/revision/latest?cb=20180127221953"
-          }
-       ]
+          "user_id": 2,
+          "user_username": "Jane1",
+          "user_name": "Jane",
+          "user_password": "null",
+          "user_role": 2
+        },
+        {
+          "user_id": 18,
+          "user_username": "JackBlack",
+          "user_name": "Jack",
+          "user_password": "Tribute1",
+          "user_role": 1
+        }
+      ]
+    }
+  },
+  "GET /api/users/:user_id": {
+    "description": "serves an object corresponding to the given user id",
+    "queries": [],
+    "exampleResponse": {
+      "users": {
+        "user_id": 2,
+        "user_username": "Jane1",
+        "user_name": "Jane",
+        "user_password": "null",
+        "user_role": 2
+      }
+    }
+  },
+  "DELETE /api/users/:user_id": {
+    "description": "Deletes a user object corresponding to the given user id and returns no content",
+    "queries": [],
+    "exampleResponse": {}
+  },
+  "PATCH /api/users/:user_id": {
+    "description": "updates and serves a user object corresponding to the given user id",
+    "queries": [],
+    "exampleRequest": {
+      "body":         {
+        "user_id": 2,
+        "user_username": "Jane1",
+        "user_name": "Jane",
+        "user_password": "null",
+        "user_role": 2
+      }
+    },
+    "exampleResponse": {
+      "users":         {
+        "user_id": 2,
+        "user_username": "Jane1",
+        "user_name": "Jane",
+        "user_password": "null",
+        "user_role": 2
+      }
+    }
+  },
+  "POST /api/users": {
+    "description": "inserts a user object and serves that user object",
+    "queries": [],
+    "exampleRequest": {
+      "body":         {
+        "user_username": "Jane1",
+        "user_name": "Jane",
+        "user_password": "null",
+        "user_role": 2
+      }
+    },
+    "exampleResponse": {
+      "users":         {
+        "user_id": 2,
+        "user_username": "Jane1",
+        "user_name": "Jane",
+        "user_password": "null",
+        "user_role": 2
+      }
+    }
+  },
+  "GET /api/roles": {
+    "description": "serves an array of all roles",
+    "queries": [],
+    "exampleResponse": {
+      "roles": [{
+        "role_id": 1,
+        "role_title": "admin"
+      },
+      {
+        "role_id": 2,
+        "role_title": "pupil"
+      }]
+    }
+  },
+  "GET /api/quiz": {
+    "description": "serves an array of all quizzes",
+    "queries": [],
+    "exampleResponse": {
+      "quizzes": [{
+        "quiz_id": 1,
+        "quiz_type": "Multiplication"
+      },
+      {
+        "quiz_id": 2,
+        "quiz_type": "Apostrophe"
+      }]
+    }
+  },
+  "GET /api/anoption": {
+    "description": "serves an array of all options in the A or An quiz",
+    "queries": [],
+    "exampleResponse": {
+      "anoptions": [{
+        "anoption_id": 1,
+        "anoption_text": "a"
+      },
+      {
+        "anoption_id": 2,
+        "anoption_text": "an"
+      }]
+    }
+  },
+  "GET /api/aoran": {
+    "description": "serves an array of all questions for the A or An quiz with the correct answer",
+    "queries": [],
+    "exampleResponse": {
+      "aoran": [{
+        "aoran_id": 1,
+        "aoran_answer": 1,
+        "aoran_question": "football"
+      },
+      {
+        "aoran_id": 2,
+        "aoran_answer": 2,
+        "aoran_question": "orange"
+      },
+      {
+        "aoran_id": 3,
+        "aoran_answer": 1,
+        "aoran_question": "banana"
+      },
+      {
+        "aoran_id": 4,
+        "aoran_answer": 1,
+        "aoran_question": "Orangutan"
+      }]
+    }
+  },
+  "POST /api/aoran": {
+    "description": "inserts a new question and answer for the A or An quiz and serves that object",
+    "queries": [],
+    "exampleRequest": {
+      "body":         {
+        "aoran_answer": 1,
+        "aoran_question": "Carrot"
+      }
+    },
+    "exampleResponse": {
+      "aoran":         {
+        "user_id": 6,
+        "aoran_answer": 1,
+        "aoran_question": "Carrot"
+      }
+    }
+  },
+  "GET /api/apostrophes": {
+    "description": "serves an array of all questions for the Apostrophes quiz with the correct answer",
+    "queries": [],
+    "exampleResponse": {
+      "apostrophes": [{
+        "apostrophe_id": 1,
+        "apostrophe_phrase": "This is ____ ball.",
+        "apostrophe_correct": "Emily's",
+        "apostrophe_wrong1": "Emilys",
+        "apostrophe_wrong2": "Emilys'"
+      },
+      {
+        "apostrophe_id": 2,
+        "apostrophe_phrase": "This is ____ book.",
+        "apostrophe_correct": "James'",
+        "apostrophe_wrong1": "Jame's",
+        "apostrophe_wrong2": "James"
+      }]
+    }
+  },
+  "POST /api/apostrophes": {
+    "description": "inserts a new question and answers for the Apostrophes quiz and serves that object",
+    "queries": [],
+    "exampleRequest": {
+      "body":         {
+        "apostrophe_phrase": "The XBox has ____ controller.",
+        "apostrophe_correct": "its",
+        "apostrophe_wrong1": "it's",
+        "apostrophe_wrong2": "null"
+      }
+    },
+    "exampleResponse": {
+      "apostrophes":         {
+        "apostrophe_id": 6,
+        "apostrophe_phrase": "The XBox has ____ controller.",
+        "apostrophe_correct": "its",
+        "apostrophe_wrong1": "it's",
+        "apostrophe_wrong2": "null"
+      }
+    }
+  },
+  "GET /api/attempts": {
+    "description": "serves an array of all quiz attempts made by all users",
+    "queries": [],
+    "exampleResponse": {
+      "attempts": [{
+        "attempt_id": 1,
+        "attempt_user_id": 2,
+        "attempt_quiz_id": 1,
+        "attempt_created_at": "2024-05-24T14:57:44.469Z",
+        "attempt_question_count": 25,
+        "attempt_correct_count": 10
+      },
+      {
+        "attempt_id": 2,
+        "attempt_user_id": 2,
+        "attempt_quiz_id": 1,
+        "attempt_created_at": "2024-05-23T14:57:44.469Z",
+        "attempt_question_count": 25,
+        "attempt_correct_count": 11
+      }]
+    }
+  },
+  "GET /api/attempts/:user_id": {
+    "description": "serves an array of all quiz attempts made by a specified user",
+    "queries": [],
+    "exampleResponse": {
+      "attempts": [{
+        "attempt_id": 1,
+        "attempt_user_id": 2,
+        "attempt_quiz_id": 1,
+        "attempt_created_at": "2024-05-24T14:57:44.469Z",
+        "attempt_question_count": 25,
+        "attempt_correct_count": 10
+      },
+      {
+        "attempt_id": 2,
+        "attempt_user_id": 2,
+        "attempt_quiz_id": 1,
+        "attempt_created_at": "2024-05-23T14:57:44.469Z",
+        "attempt_question_count": 25,
+        "attempt_correct_count": 11
+      }]
+    }
+  },
+  "GET /api/attempts/:quiz_id": {
+    "description": "serves an array of all attempts made by all users at a specific quiz",
+    "queries": [],
+    "exampleResponse": {
+      "attempts": [{
+        "attempt_id": 1,
+        "attempt_user_id": 2,
+        "attempt_quiz_id": 1,
+        "attempt_created_at": "2024-05-24T14:57:44.469Z",
+        "attempt_question_count": 25,
+        "attempt_correct_count": 10
+      },
+      {
+        "attempt_id": 2,
+        "attempt_user_id": 2,
+        "attempt_quiz_id": 1,
+        "attempt_created_at": "2024-05-23T14:57:44.469Z",
+        "attempt_question_count": 25,
+        "attempt_correct_count": 11
+      }]
+    }
+  },
+  "POST /api/attempts": {
+    "description": "inserts a new quiz attempt and serves that object",
+    "queries": [],
+    "exampleRequest": {
+      "body":         {
+        "attempt_user_id": 2,
+        "attempt_quiz_id": 1,
+        "attempt_created_at": "2024-05-28T14:57:44.469Z",
+        "attempt_question_count": 25,
+        "attempt_correct_count": 14
+      }
+    },
+    "exampleResponse": {
+      "attempts":         {
+        "attempt_id": 6,
+        "attempt_user_id": 2,
+        "attempt_quiz_id": 1,
+        "attempt_created_at": "2024-05-28T14:57:44.469Z",
+        "attempt_question_count": 25,
+        "attempt_correct_count": 14
       }
     }
   }
-  
-  
+}

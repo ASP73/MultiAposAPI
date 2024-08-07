@@ -11,6 +11,9 @@ const {
   deleteCommentById,
   getUsers,
 } = require("./controllers/controller_test");
+const {
+  generateMultiplicationQuestions,
+} = require("./controllers/multiplication");
 const endpoints = require("./endpoints.json");
 const cors = require("cors");
 const app = express();
@@ -65,6 +68,11 @@ app.use((err, req, res, next) => {
 
 app.use((err, req, res, next) => {
   res.status(500).send({ message: "Internal Server Error" });
+});
+
+app.get("/api/multiplication", (req, res) => {
+  const questions = generateMultiplicationQuestions(25);
+  res.json({ questions });
 });
 
 module.exports = app;

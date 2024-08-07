@@ -299,5 +299,25 @@
         "attempt_correct_count": 14
       }
     }
+  },
+  "GET /api/multiplication": {
+  "description": "serves an array of 25 random multiplication questions",
+  "queries": [],
+  "exampleResponse": {
+    "questions": [
+      {
+        "question_id": 1,
+        "num1": 5,
+        "num2": 7
+      },
+      {
+        "question_id": 2,
+        "num1": 3,
+        "num2": 9
+      }      
+    ]
   }
+}
+
+
 }

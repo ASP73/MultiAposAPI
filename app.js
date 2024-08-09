@@ -11,9 +11,7 @@ const {
   deleteCommentById,
   getUsers,
 } = require("./controllers/controller_test");
-const {
-  generateMultiplicationQuestions,
-} = require("./controllers/multiplication");
+const { generateMultiplicationQuestions } = require("./utils/multiplication");
 const endpoints = require("./endpoints.json");
 const cors = require("cors");
 const app = express();

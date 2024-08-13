@@ -2,15 +2,12 @@ require("dotenv").config({ path: ".env.test" });
 const connection = require("./db/connection");
 const express = require("express");
 const {
-  getTopics,
-  getArticles,
-  getArticleById,
-  getCommentsByArticleId,
-  postCommentToArticle,
-  patchArticleById,
-  deleteCommentById,
   getUsers,
-} = require("./controllers/controller_test");
+  getUserById,
+  createUser,
+  updateUser,
+  deleteUser,
+} = require("./controllers/users-controllers");
 const { generateMultiplicationQuestions } = require("./utils/multiplication");
 const endpoints = require("./endpoints.json");
 const cors = require("cors");
@@ -24,22 +21,15 @@ app.get("/api", (req, res) => {
   res.status(200).send({ endpoints });
 });
 
-app.get("/api/topics", getTopics);
-
-app.get("/api/articles", getArticles);
-
-app.get("/api/articles/:article_id", getArticleById);
-
-app.get("/api/articles/:article_id/comments", getCommentsByArticleId);
-
-app.post("/api/articles/:article_id/comments", postCommentToArticle);
-
-app.patch("/api/articles/:article_id", patchArticleById);
-
-app.delete("/api/comments/:comment_id", deleteCommentById);
-
 app.get("/api/users", getUsers);
 
+app.get("/api/users/:user_id", getUserById);
+
+app.post("/api/users", createUser);
+
+app.patch("/api/users/:user_id", updateUser);
+
+app.delete("/api/users/:user_id", deleteUser);
 app.use((err, req, res, next) => {
   if (err.status && err.message) {
     res.status(err.status).send({ message: err.message });
